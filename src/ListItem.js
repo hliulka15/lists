@@ -4,10 +4,16 @@ class ListItem extends Component {
 
     constructor(props) {
 	super(props);
-	this.state = { color: 'black' };
+	    this.state = { color: 'black' };
     }
 
     handleClick() {
+      var color = this.state.color;
+      if (color === 'black') {
+        this.setState({color: 'grey'});
+      } else {
+        this.setState({color: 'black'})
+      }
 	// Implement this function!
     }
 

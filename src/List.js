@@ -4,22 +4,19 @@ import AddItem from './AddItem.js';
 import { v4 as uuidv4 } from "uuid";
 
 class List extends Component {
-  constructor() {
-    super();
+
+  constructor(props) {
+    super(props);
     this.state = {
       items: []
     }
+    this.handleAddItem = this.handleAddItem.bind(this);
   }
-  
-  handleAddItem = (divName, newItem) => {
-    // Add the newItem to the specified div
-    // Update the state with the new items array
-    this.setState(prevState => ({
-      items: [
-        ...prevState.items,
-        { divName, item: newItem }
-      ]
-    }));
+
+  handleAddItem(newItemText) {
+    const newItem = { name: newItemText };
+    console.log('List: Adding item to list:', newItem); // Debug log
+    this.props.addItem({ newItem: newItem.name, listName: this.props.name });
   }
 
   render() {

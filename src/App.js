@@ -11,6 +11,8 @@ class App extends Component {
 	    lists: [], // this holds the name of each list
 	    items: {} // this property names of this object are the names of the lists; their values are arrays of the items in each list
     };
+    this.handleAddList = this.handleAddList.bind(this);
+    this.handleAddItem = this.handleAddItem.bind(this);
   }
 
   /**
@@ -20,13 +22,16 @@ class App extends Component {
    * as the value put into the "lists" array. It should then re-render this App component.
    */
 
-  // s is an object passed by the component AddList
   handleAddList(s) {
+    // done add list item to lists array   lists: ["Dogs"] 
     let name = s.name;
     let lists = this.state.lists;
     lists.push(name);
     this.setState({lists: lists});
-    console.log(this)
+
+    //done create list object in items object    items: {Dogs: []}
+    let items = this.state.items;
+    items[name] = [];
       // Implement this function!
   }
 
@@ -39,8 +44,18 @@ class App extends Component {
    * the state, this function  should then re-render this App component.
    */
   handleAddItem(s) {
-    console.log(this)
-      // Implement this function!
+    let newItem = s.newItem;
+    let listName = s.listName;
+    let items = Object.assign({}, this.state.items);
+
+    if (items.hasOwnProperty(listName)) {
+      items[listName] = items[listName].concat(newItem);
+    } else {
+      console.error("List does not exist!");
+    }
+    this.setState({ items: items }, () => {
+      // console.log(this.state); // Log the updated state after it's been set
+    });
   }
 
   /**

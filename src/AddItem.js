@@ -5,7 +5,7 @@ class AddItem extends Component {
   constructor() {
     super();
     this.state = {
-      newItem:{}, item: ''
+      newItem:{}
     }
     
   }
@@ -15,28 +15,21 @@ class AddItem extends Component {
   }
 
   handleSubmit(e) {
-    var divName = 'add' + this.props.idName;
     e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
-    // if(this.refs.id.value ===''){
-    //   alert('item required');
-    // } else {
-    //   console.log(this.props.idName)
-    //   console.log(this.state.text)
-    //   console.log(this.refs.id.value)
-    //   this.setState({newItem: {
-    //     item: this.refs.id.value
-    //   }}, function() {
-    //     this.props.addItem(divName, this.state.newItem);
-    //   })
-    //   console.log(this.state.newItem)
-
-    //   this.setState({
-    //     text: '',
-    //     item: ''
-    //   })
-    // }
+    if(this.refs.id.value ===''){
+      alert('item required');
+    } else {
+      let newItem = {
+        name: this.state.text,
+      };
+      this.props.addItem(newItem); // Pass newItem to the parent component
+      this.setState({
+        text: '', // Reset text after submitting
+      });
+    }
     
 
+      // Implement the rest of this function here!
   }
     
 
@@ -46,9 +39,9 @@ class AddItem extends Component {
       <div className='addItemDiv'>
       <h4>Add {this.props.idName}</h4>
       <form ref='form' onSubmit={this.handleSubmit.bind(this)}>
-      <div id={this.divName} ref={divName}>
+      <div id={divName} ref={divName}>
         <label>Name</label><br />
-        <input type='text' ref='id'  onChange = {this.handleChange.bind(this)} value = {this.state.text}/>
+        <input type='text' ref='id' onChange = {this.handleChange.bind(this)} value = {this.state.text}/>
         </div>
         <br />
         <input type='submit' value='Submit' />
