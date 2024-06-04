@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 import ListItem from './ListItem.js';
 import AddItem from './AddItem.js';
-const uuidv4 = require('uuid');
+import { v4 as uuidv4 } from "uuid";
 
 class List extends Component {
+  constructor() {
+    super();
+    this.state = {
+      items: []
+    }
+  }
+  
+  handleAddItem = (divName, newItem) => {
+    // Add the newItem to the specified div
+    // Update the state with the new items array
+    this.setState(prevState => ({
+      items: [
+        ...prevState.items,
+        { divName, item: newItem }
+      ]
+    }));
+  }
 
   render() {
     var name = this.props.name;
@@ -20,14 +37,14 @@ class List extends Component {
             )
           })}
 	</ul>
-          <AddItem idName={name} addItem={this.props.addItem.bind(this)} />
+          <AddItem idName={name} addItem={this.handleAddItem} onAddItem={this.handleAddItem} />
         </div>
       )
     }
     return (
       <div id={name} key={uuidv4()}>
         <h3>{name} List</h3>
-        <AddItem idName={name} addItem={this.props.addItem.bind(this)} />
+        <AddItem idName={name} addItem={this.handleAddItem} onAddItem={this.handleAddItem}/>
       </div>
     )
 

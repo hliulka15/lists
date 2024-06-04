@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AddList extends Component {
   constructor(props) {
     super(props)
-    this.state = {lists: [], id:0};
+    this.state = {newList:{}, lists: [], name: ''};
   }
 
   handleChange(e) {
@@ -13,15 +13,20 @@ class AddList extends Component {
 
   handleSubmit(e) {
       e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
-      var newList = {
-        text: this.state.text,
-        id: this.state.id
-      };
-      this.setState({
-        lists: this.state.lists.concat(newList),
-        text: '',
-        id: this.state.id + 1
-      });
+      if(this.refs.id.value ===''){
+        alert('List title required');
+      } else {
+        this.setState({newList: {
+          name: this.refs.id.value
+        }}, function() {
+          this.props.addList(this.state.newList);
+        })
+
+        this.setState({
+          text: '',
+          name: '',
+        })
+    }
   }
 
   render() {
