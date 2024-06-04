@@ -53,9 +53,7 @@ class App extends Component {
     } else {
       console.error("List does not exist!");
     }
-    this.setState({ items: items }, () => {
-      // console.log(this.state); // Log the updated state after it's been set
-    });
+    this.setState({ items: items }); // Log the updated state after it's been set
   }
 
   /**

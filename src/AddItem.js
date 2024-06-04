@@ -27,9 +27,6 @@ class AddItem extends Component {
         text: '', // Reset text after submitting
       });
     }
-    
-
-      // Implement the rest of this function here!
   }
     
 

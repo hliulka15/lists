@@ -3,10 +3,6 @@ import List from './List.js';
 import { v4 as uuidv4 } from "uuid";
 
 class Lists extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   // this.handleChange=this.handleChange.bind(this);
-  // }
 
   render() {
     // If there are no lists, display a relevant message
